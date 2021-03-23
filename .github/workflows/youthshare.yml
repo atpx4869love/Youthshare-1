@@ -1,11 +1,11 @@
-name: 中青助力
+name: 中青邀请阅读
 
 on:
   workflow_dispatch:
   watch:
     types: started
   schedule:
-    - cron: '13 8,2 * * *'
+    - cron: '17 2,10 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest    
