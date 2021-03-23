@@ -12,19 +12,19 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/LxgLxgLxg/Youthshare.git ~/main
+          git clone https://github.com/LxgLxgLxg/Youthshare.git ~/Youthshare
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
       - name: npm install
         run: |
-          cd ~/main
+          cd ~/Youthshare
           npm install
           npm install cron
           npm install request
           npm install md5-node
       - name: '运行 【youthshare】'
         run: |
-          cd ~/main
-          node youthshare.js
+          cd ~/Youthshare
+          node Task/youthshare.js
