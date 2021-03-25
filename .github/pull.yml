@@ -1,6 +1,0 @@
-version: "1"
-rules:                      # Array of rules
-  - base: main
-    upstream: Sunert:master
-    mergeMethod: hardreset
-    mergeUnstable: true
