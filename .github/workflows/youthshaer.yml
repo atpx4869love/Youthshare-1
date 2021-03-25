@@ -1,0 +1,30 @@
+name: 中青邀请阅读
+
+on:
+  workflow_dispatch:
+  watch:
+    types: started
+  schedule:
+    - cron: '17 0 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/LxgLxgLxg/Youthshare.git ~/Youthshare
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        run: |
+          cd ~/Youthshare
+          npm install
+          npm install cron
+          npm install request
+          npm install md5-node
+      - name: '运行 【中青邀请阅读】'
+        run: |
+          cd ~/Youthshare
+          node Task/youthshare.js
