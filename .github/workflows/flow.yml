@@ -1,0 +1,44 @@
+name: 返利网
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1,15 * * *'
+  watch:
+    types: started
+  repository_dispatch:
+    types: flw
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node_modules
+        uses: actions/cache@v2 # 使用 GitHub 官方缓存 Action。
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【返利网】'
+        run: |
+          node flw.js
+        env:
+          FL_flwURL: ${{ secrets.FL_flwURL }}
+          FL_flwHEADER: ${{ secrets.FL_flwHEADER }}		
+          FL_flwspBODY: ${{ secrets.FL_flwspBODY }}	
+          FL_flwqwBODY: ${{ secrets.FL_flwqwBODY }}        
+          FL_flwydBODY: ${{ secrets.FL_flwydBODY }}
+          FL_CASH: ${{ secrets.FL_CASH }}
+          FL_DHCASH: ${{ secrets.FL_DHCASH }}
