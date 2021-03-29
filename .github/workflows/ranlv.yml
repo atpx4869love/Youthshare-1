@@ -3,7 +3,7 @@ name: ranlv
 on:
   workflow_dispatch:
   schedule:
-    - cron: '13/30 0-18 * * *'
+    - cron: '13/30 0-12 * * *'
   watch:
     types: started
   repository_dispatch:
