@@ -1,0 +1,34 @@
+name: 燃旅视频
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: '*/30 0-13 * * *'
+  watch:
+    types: started
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        RLURL: ${{ secrets.RLURL }}
+        RLHEADER: ${{ secrets.RLHEADER }}		
+
+    steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/LxgLxgLxg/Scripts.git ~/Scripts
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        if: env.RLURL
+        run: |
+          cd ~/Scripts
+          npm install
+      - name: '运行 【燃旅视频】'
+        if: env.RLURL
+        run: |
+          cd ~/Scripts
+          node Task/ranlv.js
