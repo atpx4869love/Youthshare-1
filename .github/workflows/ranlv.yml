@@ -1,9 +1,9 @@
-name: 燃旅视频
+name: ranlv@zhiyi2
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 0-12 * * *'
+    - cron: '13/30 0-18 * * *'
   watch:
     types: started
   repository_dispatch:
@@ -37,3 +37,7 @@ jobs:
         env:
           RLURL: ${{ secrets.RLURL }}
           RLHEADER: ${{ secrets.RLHEADER }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
